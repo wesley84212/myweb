@@ -1,5 +1,6 @@
 <?php
 function __autoload($classname){
+
     list($filename ,$name) = explode('_',$classname);
 
     $file = SERVER_ROOT.'/model/'.strtolower($filename).'.php';
