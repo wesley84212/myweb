@@ -1,15 +1,38 @@
 <?php
-namespace MVC\core;
-class Controller {
 
-    function __construct(){
-        $this->load();
+class Controller
+{
+
+    public $db = null;
+    public function __construct()
+    {
+
     }
 
-    private function load ($class){
+    public function load_view($class = '')
+    {
 
-        $temp =  strtolower(str_replace('_Controller','',$class));
-        return require SERVER_ROOT.'/view/'.$temp.'.php';
+        $temp = strtolower(str_replace('_Controller', '', $class));
+
+        return SERVER_ROOT . '/view/' . $temp . '.php';
+    }
+
+    public function load_model($class = '')
+    {
+
+        $temp = strtolower(str_replace('_Controller', '', $class));
+
+        $file = SERVER_ROOT . '/model/' . $temp . '.php';
+
+        if (file_exists($file)) {
+
+            include_once $file;
+
+        } else {
+
+            die(strtolower($filename) . ' model is not found!');
+        }
+
     }
 
 }

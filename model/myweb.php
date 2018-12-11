@@ -1,21 +1,27 @@
 <?php
 
-class Myweb_Model {
+include_once SERVER_ROOT . '\core\Model.php';
+class Myweb_Model extends Model
+{
 
-    private $user_file =array(
-        'name'=>'wesley',
-        'password'=>'00000',
-        'mail'=>'wesley84212@gmail.com',
-    
-    );
-
-    public function __construct(){
+    public function __construct()
+    {
 
     }
 
-    public function get_data(){
-        $get_mail = $this->user_file;
-        return $get_mail;
+    public function get_data()
+    {
+        $db_connect = $this->load_database();
+        $sql = 'SELECT * FROM test';
+        $result = $db_connect->query($sql);
+        $data = null;
+        while ($row = $result->fetch_assoc()) {
+            $data = array(
+                'name' => $row['name'],
+                'mail' => $row['mail'],
+            );
+        }
+        return $data;
     }
 
 }
