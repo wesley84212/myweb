@@ -1,51 +1,44 @@
 <?php
-function __autoload($classname){
-    list($filename ,$name) = explode('_',$classname);
-
-    $file = SERVER_ROOT.'/model/'.strtolower($filename).'.php';
-    if(file_exists($file)){
-        include_once($file);
-    }else {
-        die(strtolower($filename).' model is not found!');
-    }
-}
-
 //get server all requert(GET)
 $request = $_SERVER['QUERY_STRING'];
-$parsed = explode('&',$request);
+$parsed = explode('&', $request);
 $getvar = array();
 
 //get controller page name url=
-$page = array_shift($parsed);  
-$page = str_replace('url=','',$page);
-
+$page = array_shift($parsed);
+$page = str_replace('url=', '', $page);
+//get function
+$function_name = $page;
 //get GET value
-foreach($parsed as $i){
+foreach ($parsed as $i) {
 
-    list($variable,$value) = explode('=',$i);
-    $getvar[$variable]=$value;
+    list($variable, $value) = explode('=', $i);
+    $getvar[$variable] = $value;
 
 }
 
-if($page===''){
-    $page='myweb';
+if ($page !== 'myweb') {
+    $page = 'myweb';
 }
 
-$target = SERVER_ROOT.'/controller/'.$page.'.php';
+if ($function_name === '') {
+    $function_name = 'index';
+}
 
-if(file_exists($target)){
+$target = SERVER_ROOT . '/controller/' . $page . '.php';
+if (file_exists($target)) {
 
-    include_once($target);
-    $class = ucfirst($page).'_Controller';
+    include_once $target;
+    $class = ucfirst($page) . '_Controller';
 
-    if(class_exists($class)){
+    if (class_exists($class)) {
         $controller = new $class;
-    }else {
+    } else {
         die('class does not exist!');
     }
 
-}else {
+} else {
     die('page does not exist!');
 }
-$controller->index();
-?>
+
+$controller->{$function_name}();

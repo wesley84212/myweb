@@ -1,12 +1,23 @@
 <?php
-class Myweb_Controller{
-    public $temp = 'myweb';
+include_once SERVER_ROOT . '\core\Controller.php';
 
-    public function index (){
+class Myweb_Controller extends Controller
+{
+
+    public function index()
+    {
+        $class = static::class;
+
+        $this->load_model($class);
+
         $models = new Myweb_Model;
         $data = $models->get_data();
-        $password =$data['password'];
-        print_r($data);
+
+        require $this->load_view($class);
+    }
+    public function get_search()
+    {
+        echo '1234';
     }
 
 }
