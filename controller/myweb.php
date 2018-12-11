@@ -17,7 +17,7 @@ class Myweb_Controller extends Controller
     }
     public function get_search()
     {
-        echo '1234';
+        echo $_POST['type'];
     }
 
 }
