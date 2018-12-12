@@ -20,7 +20,7 @@ foreach ($parsed as $i) {
 if ($page !== 'myweb') {
     $page = 'myweb';
 }
-
+// get function name
 if ($function_name === '') {
     $function_name = 'index';
 }

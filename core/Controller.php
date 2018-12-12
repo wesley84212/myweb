@@ -50,4 +50,15 @@ class Controller
 
     }
 
+    public function load_js($js_name)
+    {
+        $path = SITE_ROOT;
+        $file = glob('./js/' . $js_name . '.*');
+        foreach ($file as $filename) {
+            echo '<script src="' . $path . $filename . '"></script>';
+
+        }
+
+    }
+
 }
