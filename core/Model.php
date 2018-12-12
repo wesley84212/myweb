@@ -1,7 +1,5 @@
 <?php
 
-include_once SERVER_ROOT . '/config/database.php';
-
 class Model
 {
 

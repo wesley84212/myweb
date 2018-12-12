@@ -37,8 +37,17 @@ class Controller
 
     public function load_api($api_name, $api_ver)
     {
-        echo SITE_ROOT . '/api/' . $api_name . '/' . $api_ver;
-        echo '<script src="' . SITE_ROOT . '/api/' . $api_name . '/' . $api_ver . '/' . $api_name . '.min.js"></script>';
+        $path = SERVER_ROOT . '/api/' . $api_name . '/' . $api_ver . '';
+        $api_url = '' . SITE_ROOT . '/api/' . $api_name . '/' . $api_ver . '/';
+        $file = scandir($path);
+
+        foreach ($file as $filename) {
+            if (strpos($filename, 'js')) {
+                echo '<script src="' . $api_url . $filename . '"></script>';
+            }
+
+        }
+
     }
 
 }
