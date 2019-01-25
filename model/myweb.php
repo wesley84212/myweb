@@ -24,4 +24,27 @@ class Myweb_Model extends Model
         return $data;
     }
 
+    public function login($input)
+    {
+
+        $db_connect = $this->load_database();
+        $sql = 'SELECT name,password FROM test WHERE name="' . $input["account"] . '"AND password="' . $input["password"] . '"';
+        $result = $db_connect->query($sql);
+        $row = $result->num_rows;
+        $data = null;
+        if ($row === 0) {
+            $data = array(
+                'status' => 400,
+                'message' => '帳號或密碼錯誤',
+            );
+        } else {
+            $data = array(
+                'status' => 200,
+                'message' => '登入成功，歡迎' . $input["account"] . '',
+            );
+        }
+        return $data;
+
+    }
+
 }

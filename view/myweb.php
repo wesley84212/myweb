@@ -11,11 +11,10 @@ $this->load_js('myweb');
         <hr/>
         <h2>資料庫資料讀取</h2>
         <hr/>
-        <h4>姓名：<?=$data['name'];?></h4>
-        <h4>Email：<?=$data['mail'];?></h4>
-        <button id='search'>查詢</button>
-        <div id="myDiv"></div>
-        <div id="myDiv_2"></div>
+        <h4>帳號:<input type="text" id='account'></h4>
+        <h4>密碼:<input type="text" id='password'></h4>
+        <button id='search'>登入</button>
+
     </body>
 </html>
 <script>

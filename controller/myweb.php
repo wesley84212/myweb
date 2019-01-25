@@ -15,22 +15,19 @@ class Myweb_Controller extends Controller
 
         require $this->load_view($class);
     }
-    public function get_search()
+    public function login()
     {
-        $cmd = 'python CP_Characteristic_v1.1.py';
-        exec($cmd, $output);
-        $result = array(
-            'url_1' => $this->url_replace($output[0]),
-            'url_2' => $this->url_replace($output[1]),
-        );
-        echo json_encode($result);
-    }
+        $data = $_POST;
+        $class = static::class;
 
-    private function url_replace($str)
-    {
-        $result = str_replace('file://C:', '', $str);
-        $result = str_replace('xampp\htdocs', '', $result);
-        return substr($result, 1);
+        $this->load_model($class);
+
+        $models = new Myweb_Model;
+
+        $result = $models->login($data);
+
+        echo (json_encode($result));
+
     }
 
 }

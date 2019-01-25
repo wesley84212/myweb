@@ -1,14 +1,18 @@
 $(document).ready(function () {
 
     $('#search').click(function () {
+        var account = $('#account').val();
+        var password = $('#password').val();
         $.ajax({
             method: 'POST',
-            url: 'http://' + base_url + '/mvc/get_search',
+            url: 'http://' + base_url + '/mvc/login',
             dataType: 'JSON',
-            data: { type: 'get' },
+            data: {
+                account: account,
+                password: password
+            },
             success: function (data) {
-                $('#myDiv').html('<iframe id="test" src=' + data.url_1 + ' height="500px" width="500px"></iframe>')
-                $('#myDiv_2').html('<iframe id="test" src=' + data.url_2 + ' height="500px" width="500px"></iframe>')
+                alert(data.message)
             },
             error: function () {
                 alert('error');
